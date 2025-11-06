@@ -2,7 +2,7 @@
 #script="$(echo "$scripts" | rofi -dmenu -p menu -theme gruvbox-dark -kb-select-1 "1" -kb-select-2 "2")"
 
 #if [ "$script" = "mango" ]; then
-    
+
 #fi
 
 #if [ "$script" = "ssh" ]; then
@@ -51,13 +51,36 @@ function mango_layouts() {
     mmsg -l $LAYOUT
 }
 
-case "$(menu "layouts\ntags\nwallpaper\nlights\nssh")" in
+wallpaper() {
+    ACTIONS="playlist-next${DISPLAY}Next wallpaper"
+    ACTIONS="$ACTIONS\nplaylist-prev${DISPLAY}Previous wallpaper"
+    ACTIONS="$ACTIONS\ncycle pause${DISPLAY}Pause/Unpause"
+    ACTION="$(menu "$ACTIONS")"
+    echo "$ACTION" | socat - /run/user/1000/mpv
+}
+
+lights() {
+    LIGHTS="light.hue_color_lamp_1_2${DISPLAY}Taklampe"
+    ACTIONS="toggle${DISPLAY}Toggle\nturn_on${DISPLAY}Turn On\nturn_off${DISPLAY}Turn Off"
+
+    LIGHT="$(menu "$LIGHTS")"
+    ACTION="$(menu "$ACTIONS")"
+
+    source $(dirname "$0")/.secrets
+
+    echo $LIGHT $ACTION
+    curl \
+      -H "Authorization: Bearer $HA_API_TOKEN" \
+      -H "Content-Type: application/json" \
+      "$HA_API_URL/api/services/light/$ACTION" \
+      -d "{\"entity_id\": \"$LIGHT\"}"
+}
+
+case "$(menu "layouts\ntags\nwallpaper\nlights\n")" in
     "layouts")
         mango_layouts;;
     "wallpaper")
-        menu "TODO";;
+        wallpaper;;
     "lights")
-        menu "TODO";;
-    "ssh")
-        menu "TODO";;
+        lights;;
 esac

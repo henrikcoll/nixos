@@ -1,0 +1,63 @@
+{
+  "modules-left": ["ext/workspaces", "custom/sep", "dwl/window#layout"],
+  "modules-right": [
+    "network",
+    "custom/sep",
+    "cpu",
+    "custom/sep",
+    "memory",
+    "custom/sep",
+    "disk",
+    "custom/sep",
+    "clock",
+    "custom/sep",
+    "tray",
+  ],
+
+  "clock": {
+    "format-alt": "{:%Y-%m-%d}",
+  },
+  "cpu": {
+    "format": "CPU: {usage}%",
+    "tooltip": false,
+  },
+  "memory": {
+    "format": "Mem: {used}GiB",
+  },
+  "disk": {
+    "interval": 60,
+    "path": "/",
+    "format": "Disk: {free}",
+  },
+  "network": {
+    "format": "Online",
+    "format-disconnected": "Disconnected ⚠",
+  },
+  "ext/workspaces": {
+    "format": "{icon}",
+    "ignore-hidden": false,
+    "on-click": "activate",
+    "sort-by-id": true,
+  },
+  "dwl/tags": {
+    "num-tags": 9,
+  },
+  "dwl/window#layout": {
+    "format": "[{layout}]",
+  },
+  "dwl/window#title": {
+    "format": "{title}",
+  },
+  "custom/sep": {
+    "format": "|",
+    "interval": 0,
+  },
+  "tray": {
+    "icon-size": 16,
+    "spacing": 10,
+    "icons": {
+      "discord": "\uf1ff",
+      "1Password": "\udb82\ude6a",
+    },
+  },
+}

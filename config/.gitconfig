@@ -1,0 +1,12 @@
+[user]
+	name = Henrik Karolus Næss
+	email = henrik@heka.no
+	signingkey = C7FA33A8B00A1E1169920E1BD96D51DAD7FB34BD
+[init]
+	defaultbranch = main
+[commit]
+	gpgsign = true
+[core]
+	editor = nvim
+[push]
+	autosetupremote = true

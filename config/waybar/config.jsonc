@@ -1,0 +1,39 @@
+{
+  "layer": "bottom",
+  "margin-top": 10,
+  "margin-left": 10,
+  "margin-right": 10,
+  "modules-left": ["custom/music"],
+  "modules-center": ["hyprland/workspaces"],
+  "modules-right": ["clock"],
+  "clock": {
+    "format-alt": "{:%a, %d. %b  %H:%M}",
+  },
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+      "1": "\udb80\ude39",
+      "2": "\ue795",
+      "3": "\uf01f",
+      "4": "\uf1b6",
+      "5": "\uf069",
+      "6": "6",
+      "7": "7",
+      "8": "8",
+      "9": "9",
+      "10": "10",
+    },
+    "persistent-workspaces": {
+      "*": 5,
+    },
+  },
+  "custom/music": {
+    "format": "{}",
+    "escape": true,
+    "interval": 5,
+    "tooltip": true,
+    "exec": "playerctl metadata --format='{{ title }}'",
+    "on-click": "playerctl play-pause",
+    "max-length": 25,
+  },
+}

@@ -1,0 +1,38 @@
+@import "mocha.css";
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrainsMono Nerd Font Propo";
+    font-size: 14px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: transparent;
+    color: @text;
+}
+
+#workspaces button {
+    border-radius: 10rem;
+
+    background-color: @base;
+    color: @text;
+    padding: 0.5rem 0.6rem;
+
+    margin: 0 2.5px;
+    min-width: 1.25rem;
+}
+
+#workspaces button.active {
+    background: @mauve;
+    color: @crust;
+}
+
+#clock,
+#custom-music {
+    background-color: @base;
+    color: @text;
+    padding: 0.5rem 0.6rem;
+    border-radius: 1rem;
+}

@@ -25,6 +25,8 @@
 
   };
 
+  services.mako.enable = true;
+
   home.file.".config/hypr".source = ./config/hypr;
   home.file.".config/mango".source = ./config/mango;
   home.file.".config/kitty".source = ./config/kitty;

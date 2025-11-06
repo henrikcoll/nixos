@@ -101,6 +101,7 @@
     slurp
     pavucontrol
     pinentry-curses
+    mpvpaper
   ];
 
   fonts.packages = with pkgs; [

@@ -102,6 +102,7 @@
     pavucontrol
     pinentry-curses
     mpvpaper
+    socat
   ];
 
   fonts.packages = with pkgs; [

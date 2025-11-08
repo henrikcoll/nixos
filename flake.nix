@@ -11,10 +11,12 @@
 		  url = "github:DreamMaoMao/mangowc";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
+		agenix.url = "github:ryantm/agenix";
 	};
 
-	outputs = { nixpkgs, home-manager, mangowc, ... }: {
+	outputs = { self, nixpkgs, home-manager, mangowc, agenix, ... }: {
 		nixosConfigurations.titan = nixpkgs.lib.nixosSystem {
+		  system = "x86_64-linux";
 			modules = [
 				./configuration.nix
 				home-manager.nixosModules.home-manager {
@@ -25,10 +27,13 @@
 						backupFileExtension = "backup";
   					sharedModules = [
               #mangowc.hmModules.mango { }
+              agenix.homeManagerModules.default
   					];
 					};
 				}
 				mangowc.nixosModules.mango
+				agenix.nixosModules.default
+  		  { environment.systemPackages = [ agenix.packages.x86_64-linux.default ]; }
 			];
 		};
 	};

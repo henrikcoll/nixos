@@ -50,7 +50,7 @@
 
   services.openssh.enable = true;
 
-  services.getty.autologinUser = "henrik";
+  #services.getty.autologinUser = "henrik";
 
   services.pcscd.enable = true;
   programs.gnupg.agent = {
@@ -87,7 +87,7 @@
     enable = true;
   };
 
-  programs.mango.enable = true;
+  #programs.mango.enable = true;
 
   environment.systemPackages = with pkgs; [
     vim
@@ -103,7 +103,17 @@
     pinentry-curses
     mpvpaper
     socat
+    uwsm
+    wlr-randr
+    xdg-desktop-portal
+    xdg-desktop-portal-wlr
+    xdg-desktop-portal-gtk
+    xdg-desktop-portal-hyprland
   ];
+
+  programs.xwayland.enable = true;
+
+  qt = { enable = true; };
 
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
@@ -111,5 +121,43 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  programs.mango.enable = true;
+
   system.stateVersion = "25.05";
+
+  programs.uwsm = {
+    enable = true;
+    waylandCompositors.mango = {
+      binPath = "/run/current-system/sw/bin/mango";
+      prettyName = "Mango";
+      comment = "Mango compositor with UWSM";
+    };
+  };
+
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-wlr ];
+    config = {
+      mango = {
+        default = [ "wlr" "gtk" ];
+        "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+      };
+    };
+    xdgOpenUsePortal = true;
+  };
+
+  services.greetd = { enable = true; };
+  security.pam.services.greetd.enable = true;
+  programs.regreet = {
+    enable = true;
+    cageArgs = [ "-s" "-m" "last" ];
+  };
+
+  services.greetd.settings = {
+    initial_session = {
+      command = "${pkgs.uwsm}/bin/uwsm start /run/current-system/sw/bin/mango";
+      user = "henrik";
+    };
+  };
 }

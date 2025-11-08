@@ -11,11 +11,11 @@
     shellAliases = {
       nrs = "sudo nixos-rebuild switch --flake ~/nixos#titan";
     };
-    profileExtra = ''
-      if [ -z "$SSH_CONNECTION" ] && [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" = "1" ]; then
-        exec mango
-      fi
-    '';
+    #profileExtra = ''
+    #  if [ -z "$SSH_CONNECTION" ] && [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" = "1" ]; then
+    #    exec mango
+    #  fi
+    #'';
     bashrcExtra = ''
       export GPG_TTY=$(tty)
       export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
@@ -34,8 +34,18 @@
   home.file.".config/zed".source = ./config/zed;
   home.file.".gitconfig".source = ./config/.gitconfig;
 
-  home.packages = with pkgs; [
+  #wayland.windowManager.mango = {
+  #  enable = true;
+  #  systemd.enable = true;
+  #  autostart_sh = ''
+  #      uwsm finalize SWAYSOCK I3SOCK XCURSOR_SIZE XCURSOR_THEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP &
 
+  #      dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+  #      systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+  #  '';
+  #};
+
+  home.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
     zed-editor
     discord

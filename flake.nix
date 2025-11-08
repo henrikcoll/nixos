@@ -23,6 +23,9 @@
 						useUserPackages = true;
 						users.henrik = import ./home.nix;
 						backupFileExtension = "backup";
+  					sharedModules = [
+              #mangowc.hmModules.mango { }
+  					];
 					};
 				}
 				mangowc.nixosModules.mango

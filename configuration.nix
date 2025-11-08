@@ -198,6 +198,10 @@
           path = "/home/henrik/Videos";
           devices = [ "fatshark" ];
         };
+        "Pictures" = {
+          path = "/home/henrik/Pictures";
+          devices = [ "fatshark" ];
+        };
       };
     };
   };
